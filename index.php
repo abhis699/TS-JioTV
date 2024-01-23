@@ -1,5 +1,5 @@
 <!--
-* Copyright 2021-2023 SnehTV, Inc.
+* Copyright 2021-2024 SnehTV, Inc.
 * Licensed under MIT (https://github.com/mitthu786/TS-JioTV/blob/main/LICENSE)
 * Created By : TechieSneh
 -->
@@ -14,7 +14,7 @@
     <meta name="keywords" content="JIOTV, LIVETV, SPORTS, MOVIES, MUSIC">
     <meta name="author" content="Techie Sneh">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/37fVLxB/f4027915ec9335046755d489a14472f2.png">
+    <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
     <link rel="stylesheet" href="app/assets/css/techiesneh.min.css">
     <link rel="stylesheet" href="app/assets/css/search.css">
     <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
@@ -26,20 +26,30 @@
 </head>
 
 <body>
-    <div id="jtvh1">
-        <h1>JIOTV+</h1>
-    </div>
-    <div id="userButtons">
-        <button id="loginButton">Login</button>
-        <button id="logoutButton">Logout</button>
-        <button id="PlayListButton">PlayList</button>
-    </div><br>
+    <header>
+        <div id="jtvh1">
+            <img src="https://ik.imagekit.io/techiesneh/tv_logo/jtv-plus_TMaGGk6N0.png" alt="JIOTV+">
+        </div>
+        <div id="userButtons">
+            <button id="loginButton">Login</button>
+            <button id="refreshButton">Refresh</button>
+            <button id="logoutButton">Logout</button>
+            <button id="PlayListButton">PlayList</button>
+        </div>
+    </header></br>
     <div id="searchWrapper">
         <input type="text" name="searchBar" id="searchBar" placeholder="Search ..." />
     </div>
     <div id="content">
         <div class="container">
             <div class="filters">
+                <label for="catchupFilter">Catchup:</label>
+                <select id="catchupFilter">
+                    <option value="">All</option>
+                    <option value="y">True</option>
+                    <option value="n">False</option>
+                </select>
+
                 <label for="genreFilter">Genre:</label>
                 <select id="genreFilter">
                     <option value="">All</option>
@@ -85,36 +95,5 @@
     </div>
     <script src="app/assets/js/search.js"></script>
 </body>
-<script>
-    document.getElementById("loginButton").addEventListener("click", function() {
-        window.location.href = "app/login.php";
-    });
-
-    document.getElementById("logoutButton").addEventListener("click", function() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "app/logout.php", true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                alert(xhr.responseText);
-            }
-        };
-        xhr.send();
-    });
-
-    const PlayListButton = document.getElementById('PlayListButton');
-    PlayListButton.addEventListener('click', () => {
-        const currentProtocol = window.location.protocol;
-        const currentHost = window.location.host;
-        const currentPathname = window.location.pathname.split("/");
-        const currentURL = currentProtocol + '//' + currentHost + '/' + currentPathname[1] + '/app/playlist.php';
-        navigator.clipboard.writeText(currentURL)
-            .then(() => {
-                alert('PlayList URL copied to clipboard!');
-            })
-            .catch((error) => {
-                console.error('Error copying URL:', error);
-            });
-    });
-</script>
 
 </html>
